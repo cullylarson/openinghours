@@ -1,10 +1,16 @@
 import {openingHoursToHuman} from '../esm/'
 
 test('Handles an empty string well.', () => {
-    const result = openingHoursToHuman('')
+    expect(openingHoursToHuman('')).toEqual([])
+})
 
-    expect(result.length).toBe(0)
-    expect(result).toEqual([])
+test('Handles non-string values well.', () => {
+    expect(openingHoursToHuman(false)).toEqual([])
+    expect(openingHoursToHuman(0)).toEqual([])
+    expect(openingHoursToHuman(null)).toEqual([])
+    expect(openingHoursToHuman(undefined)).toEqual([])
+    expect(openingHoursToHuman({a: 'A'})).toEqual([])
+    expect(openingHoursToHuman([1, 2])).toEqual([])
 })
 
 test('Formats a single day with no time.', () => {

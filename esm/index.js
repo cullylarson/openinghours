@@ -194,10 +194,12 @@ const formatOneSet = options => set => {
     }
 }
 
+const isString = x => typeof x === 'string' || x instanceof String
+
 export const openingHoursToDetails = (openingHours, options) => {
     options = {...defaultOptions, ...options}
 
-    if(!openingHours || !openingHours.trim()) return []
+    if(!isString(openingHours) || !openingHours || !openingHours.trim()) return []
 
     return openingHours
         .trim()
