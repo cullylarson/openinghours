@@ -21,7 +21,7 @@ One addition I've made to allow multiple sets of openingHours to be included in 
 
 ## Notes
 
-The format for the `openingHours` string is picky. You can't included extra spaces (e.g. like around the hypen) since spaces are used as a separator.
+The format for the `openingHours` string is picky. You can't included extra spaces (e.g. like around the hypen) since spaces are used as a separator. For example. this doesn't work `Mo-Fr 8:00 - 17:00` because of the spaces around the hyphens in the time portion of the string.
 
 ## Usage:
 
