@@ -6,14 +6,14 @@
 npm install @cullylarson/openinghours
 ```
 
-```
+```js
 import {openingHoursToHuman} from '@cullylarson/openinghours'
 
 console.log(openingHoursToHuman('Mo-Fr 9:00-17:00')[0].human)
 // Monday - Friday 9 a.m. - 5 p.m.
 ```
 
-```
+```js
 import {openingHoursToHuman} from '@cullylarson/openinghours'
 
 export default () => {
@@ -54,7 +54,7 @@ A couple examples with an explanation after.
 
 **Example 1:**
 
-```
+```js
 import {openingHoursToHuman} from '@cullylarson/openinghours'
 
 const results = openingHoursToHuman('Mo-Fr 9:00-17:00')
@@ -62,7 +62,7 @@ const results = openingHoursToHuman('Mo-Fr 9:00-17:00')
 
 Produces:
 
-```
+```json
 [
   {
     "openingHours": "Mo-Fr 9:00-17:00",
@@ -73,7 +73,7 @@ Produces:
 
 **Example 2:**
 
-```
+```js
 import {openingHoursToHuman} from '@cullylarson/openinghours'
 
 const results = openingHoursToHuman('Mo-Tu 8:10-16:25,17:00-18:07; We,Fr 12:05-14:05; Th-Fr,Sa 6:03-7:30; Su')
@@ -81,7 +81,7 @@ const results = openingHoursToHuman('Mo-Tu 8:10-16:25,17:00-18:07; We,Fr 12:05-1
 
 Produces:
 
-```
+```json
 [
   {
     "openingHours": "Mo-Tu 8:10-16:25,17:00-18:07",
@@ -108,15 +108,15 @@ Notice that each "set" of openingHours (i.e. separatored by `;`) gets its own it
 
 Parses the openingHours string and produces a result as an object, rather than a human-readable string. Useful if you want to pull specific data out. It is used by the `openingHoursToHuman` function. It is not currently documented or directly tested (just indirectly by testing `openingHoursToHuman`).
 
-```
+```js
 import {openingHoursToDetails} from '@cullylarson/openinghours'
 
-const results = openingHoursToDetails('Mo 1-3; Tu; We 9:00-13:00; Th; Fr; Sa; Su 14:00-19:34')
+const results = openingHoursToDetails('Mo-Tu 8:10-16:25,17:00-18:07; We,Fr 12:05-14:05; Th-Fr,Sa 6:03-7:30; Su')
 ```
 
 Produces:
 
-```
+```json
 [
   {
     "openingHours": "Mo-Tu 8:10-16:25,17:00-18:07",
@@ -188,7 +188,7 @@ Produces:
 
 Here are the default options. See [test/openingHoursToStr.test.js](test/openingHoursToStr.test.js) for examples.
 
-```
+```js
 {
     dayNames: {
         Mo: 'Monday',
@@ -226,10 +226,10 @@ Change the value of the human-radable am/pm string produced. Set to empty string
 
 Can be one of the following:
 
-- **h** — 1, 2, ..., 11, 12
-- **hh** — 01, 02, ..., 11, 12
-- **H** — 0, 1, 2, ..., 23. No am/pm is added to this format. You may want to set `includeZeroMinutes` to true for this format.
-- **HH** — 00, 01, 02, ..., 23. No am/pm is added to this format. You may want to set `includeZeroMinutes` to true for this format.
+- **h**: 1, 2, ..., 11, 12
+- **hh**: 01, 02, ..., 11, 12
+- **H**: 0, 1, 2, ..., 23. No am/pm is added to this format. You may want to set `includeZeroMinutes` to true for this format.
+- **HH**: 00, 01, 02, ..., 23. No am/pm is added to this format. You may want to set `includeZeroMinutes` to true for this format.
 
 ### includeZeroMinutes
 
