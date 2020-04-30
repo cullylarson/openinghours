@@ -2,6 +2,10 @@
 
 > Parses a schema.org openingHours string into a human-readable format.
 
+```
+npm install @cullylarson/openinghours
+```
+
 Schema.org [defines a format for open hours](https://schema.org/openingHours). Basically when a store, business, location, etc. is open. It's a useful format for storing in a database as a string and then parsing for various uses.
 
 According to [schema.org]((https://schema.org/openingHours)):
