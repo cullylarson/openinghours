@@ -74,15 +74,6 @@ const oneOpeningHoursToDetails = options => openingHours => {
     }
 }
 
-export const openingHoursToDetails = (openingHours, options) => {
-    options = {...defaultOptions, ...options}
-
-    return openingHours
-        .trim()
-        .split(options.multiItemSeparator)
-        .map(oneOpeningHoursToDetails(options))
-}
-
 const formatDay = options => day => {
     return day
         .map(x => options.dayNames[x])
@@ -201,6 +192,15 @@ const formatOneSet = options => set => {
         openingHours: set.openingHours,
         human: [formatDays(options, set.days), formatHours(options, set.hours)].join(options.dayHourSeparator),
     }
+}
+
+export const openingHoursToDetails = (openingHours, options) => {
+    options = {...defaultOptions, ...options}
+
+    return openingHours
+        .trim()
+        .split(options.multiItemSeparator)
+        .map(oneOpeningHoursToDetails(options))
 }
 
 export const openingHoursToHuman = (openingHours, options) => {

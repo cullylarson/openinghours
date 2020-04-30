@@ -19,6 +19,72 @@ One addition I've made to allow multiple sets of openingHours to be included in 
 
 The format for the `openingHours` string is picky. You can't included extra spaces (e.g. like around the hypen) since spaces are used as a separator.
 
+## Usage:
+
+### openingHoursToHuman
+
+A couple examples with an explanation after.
+
+**Example 1:**
+
+```
+const result = openingHoursToHuman('Mo-Fr 9:00-17:00')
+```
+
+Would produce the result:
+
+```
+[
+  {
+    "openingHours": "Mo-Fr 9:00-17:00",
+    "human": "Monday - Friday 9 a.m. - 5 p.m."
+  }
+]
+```
+
+**Example 2:**
+
+```
+const result = openingHoursToHuman('Mo 1-3; Tu; We 9:00-13:00; Th; Fr; Sa; Su 14:00-19:34')
+```
+
+Would produce the result:
+
+```
+[
+  {
+    "openingHours": "Mo 1-3",
+    "human": "Mon 1 - 3 a.m."
+  },
+  {
+    "openingHours": "Tu",
+    "human": "Tue all day"
+  },
+  {
+    "openingHours": "We 9:00-13:00",
+    "human": "Wed 9 a.m. - 1 p.m."
+  },
+  {
+    "openingHours": "Th",
+    "human": "Thu all day"
+  },
+  {
+    "openingHours": "Fr",
+    "human": "Fri all day"
+  },
+  {
+    "openingHours": "Sa",
+    "human": "Sat all day"
+  },
+  {
+    "openingHours": "Su 14:00-19:34",
+    "human": "Sun 2 - 7:34 p.m."
+  }
+]
+```
+
+Notice that each "set" of openingHours (i.e. separatored by `;`) get its own item in the result array. Each item in the array has 'openingHours' (the original openingHours string that produced the result) and `human` (the human-readable version of the openingHours string).
+
 ## Options:
 
 Here are the default options. See [test/openingHoursToStr.test.js](openingHoursToStr.test.js) for examples.
@@ -82,7 +148,7 @@ If no hour range is provided, will output this text. For example: `Mo` would pro
 
 ### multiItemSeparator
 
-If you want to allow multiple openingHours items to be included in a single string, this is the separator. For example: `Mo 1:00-3:00; We 9:00-13:00`. This is the separator in the openingHours string; it has not affect on the format of the human-readable output. 
+If you want to allow multiple openingHours items to be included in a single string, this is the separator. For example: `Mo 1:00-3:00; We 9:00-13:00`. This is the separator in the openingHours string; it has not affect on the format of the human-readable output.
 
 ### dayHourSeparator
 
