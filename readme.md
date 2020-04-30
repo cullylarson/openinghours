@@ -21,7 +21,7 @@ export default () => {
 
     return (
         <>
-            results.map(result => (<time itemprop="openingHours" datetime={result.openingHours}>{result.human}</time>))
+            results.map(result => (<time itemProp="openingHours" dateTime={result.openingHours}>{result.human}</time>))
         </>
     )
 }
