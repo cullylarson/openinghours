@@ -1,6 +1,6 @@
 {
   "name": "@cullylarson/openinghours",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Parses a schema.org openingHours string into a human-readable format.",
   "main": "cjs/",
   "module": "esm/",
