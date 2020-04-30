@@ -18,8 +18,8 @@ const defaultOptions = {
     dayHourSeparator: ' ',
     multiDaySeparator: ', ',
     dayRangeSeparator: ' - ',
-    hourRangeSeparator: ' - ',
     multiHourSeparator: ', ',
+    hourRangeSeparator: ' - ',
 }
 
 const trim = x => x.trim()
