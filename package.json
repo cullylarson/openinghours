@@ -1,5 +1,5 @@
 {
-  "name": "openinghours",
+  "name": "@cullylarson/openinghours",
   "version": "0.1.0",
   "description": "Parses a schema.org openingHours string into a human-readable format.",
   "main": "cjs/",
