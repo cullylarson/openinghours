@@ -6,6 +6,27 @@
 npm install @cullylarson/openinghours
 ```
 
+```
+import {openingHoursToHuman} from '@cullylarson/openinghours'
+
+console.log(openingHoursToHuman('Mo-Fr 9:00-17:00')[0].human)
+// Monday - Friday 9 a.m. - 5 p.m.
+```
+
+```
+import {openingHoursToHuman} from '@cullylarson/openinghours'
+
+export default () => {
+    const results = openingHoursToHuman('Mo-Fr 9:00-17:00')
+
+    return (
+        <>
+            results.map(result => (<time itemprop="openingHours" datetime={result.openingHours}>{result.human}</time>))
+        </>
+    )
+}
+```
+
 Schema.org [defines a format for open hours](https://schema.org/openingHours). Basically when a store, business, location, etc. is open. It's a useful format for storing in a database as a string and then parsing for various uses.
 
 According to [schema.org]((https://schema.org/openingHours)):
@@ -17,11 +38,13 @@ Opening hours can be specified as a weekly time range, starting with days, then 
 - For example: `Tu,Th 16:00-20:00` corresponds to `Tuesday and Thursday 4-8pm`.
 - If a business is open 7 days a week, then it can be specified as `Mo-Su`.
 
-One addition I've made to allow multiple sets of openingHours to be included in a single string. This is convenient for storing multiple openingHours in a single column in a database.
+One addition I've made is to allow multiple sets of openingHours to be included in a single string. This is convenient for storing multiple openingHours in a single column in a database.
 
 ## Notes
 
-The format for the `openingHours` string is picky. You can't included extra spaces (e.g. like around the hypen) since spaces are used as a separator. For example. this doesn't work `Mo-Fr 8:00 - 17:00` because of the spaces around the hyphens in the time portion of the string.
+1. The format for the `openingHours` string is picky. You can't included extra spaces (e.g. like around the hypen) since spaces are used as a separator. For example, this doesn't work `Mo-Fr 8:00 - 17:00` because of the spaces around the hyphens in the time portion of the string. It should be: `Mo-Fr 8:00-17:00`
+
+1. I don't know if the schema.org spec allows for this, but this library allows you to not include the zero padding on the hour and it allows you to leave out the minutes (will assume they are `00`). For example, `Mo 8-17` would still parse to `Monday 8 a.m. - 5 p.m.`.
 
 ## Usage:
 
@@ -32,10 +55,12 @@ A couple examples with an explanation after.
 **Example 1:**
 
 ```
-const result = openingHoursToHuman('Mo-Fr 9:00-17:00')
+import {openingHoursToHuman} from '@cullylarson/openinghours'
+
+const results = openingHoursToHuman('Mo-Fr 9:00-17:00')
 ```
 
-Would produce the result:
+Would produce:
 
 ```
 [
@@ -49,10 +74,12 @@ Would produce the result:
 **Example 2:**
 
 ```
-const result = openingHoursToHuman('Mo 1-3; Tu; We 9:00-13:00; Th; Fr; Sa; Su 14:00-19:34')
+import {openingHoursToHuman} from '@cullylarson/openinghours'
+
+const results = openingHoursToHuman('Mo 1-3; Tu; We 9:00-13:00; Th; Fr; Sa; Su 14:00-19:34')
 ```
 
-Would produce the result:
+Would produce:
 
 ```
 [
@@ -87,11 +114,17 @@ Would produce the result:
 ]
 ```
 
-Notice that each "set" of openingHours (i.e. separatored by `;`) get its own item in the result array. Each item in the array has 'openingHours' (the original openingHours string that produced the result) and `human` (the human-readable version of the openingHours string).
+Notice that each "set" of openingHours (i.e. separatored by `;`) gets its own item in the results array. Each item in the array has `openingHours` (the original openingHours string that produced the result) and `human` (the human-readable version of the openingHours string).
 
 ### openingHoursToDetails
 
 Parses the openingHours string and produces a result as an object, rather than a human-readable string. Useful if you want to pull specific data out. It is used by the `openingHoursToHuman` function. It is not currently documented or directly tested (just indirectly by testing `openingHoursToHuman`).
+
+```
+import {openingHoursToDetails} from '@cullylarson/openinghours'
+
+const results = openingHoursToDetails('Mo 1-3; Tu; We 9:00-13:00; Th; Fr; Sa; Su 14:00-19:34')
+```
 
 ## Options:
 
