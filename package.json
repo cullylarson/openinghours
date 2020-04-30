@@ -1,0 +1,35 @@
+{
+  "name": "openinghours",
+  "version": "0.1.0",
+  "description": "Parses a schema.org openingHours string into a human-readable format.",
+  "main": "cjs/",
+  "module": "esm/",
+  "scripts": {
+    "test": "jest ./test",
+    "clean": "rm -rf cjs",
+    "lint": "esw --color --watch ./esm ./test",
+    "build": "npm run clean && babel esm --out-dir cjs",
+    "prepare": "npm test && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cullylarson/openinghours.git"
+  },
+  "author": "Cully Larson <cully.larson@gmail.com>",
+  "homepage": "https://github.com/cullylarson/openinghours#readme",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/plugin-proposal-object-rest-spread": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-add-module-exports": "^1.0.2",
+    "eslint": "^6.8.0",
+    "eslint-plugin-jest": "^23.8.2",
+    "eslint-watch": "^6.0.1",
+    "jest": "^25.5.2",
+    "standard": "^14.3.3"
+  },
+  "dependencies": {}
+}
