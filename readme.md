@@ -91,7 +91,7 @@ Parses the openingHours string and produces a result as an object, rather than a
 
 ## Options:
 
-Here are the default options. See [test/openingHoursToStr.test.js](openingHoursToStr.test.js) for examples.
+Here are the default options. See [test/openingHoursToStr.test.js](test/openingHoursToStr.test.js) for examples.
 
 ```
 {
