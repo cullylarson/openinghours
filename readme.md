@@ -60,7 +60,7 @@ import {openingHoursToHuman} from '@cullylarson/openinghours'
 const results = openingHoursToHuman('Mo-Fr 9:00-17:00')
 ```
 
-Would produce:
+Produces:
 
 ```
 [
@@ -76,40 +76,28 @@ Would produce:
 ```
 import {openingHoursToHuman} from '@cullylarson/openinghours'
 
-const results = openingHoursToHuman('Mo 1-3; Tu; We 9:00-13:00; Th; Fr; Sa; Su 14:00-19:34')
+const results = openingHoursToHuman('Mo-Tu 8:10-16:25,17:00-18:07; We,Fr 12:05-14:05; Th-Fr,Sa 6:03-7:30; Su')
 ```
 
-Would produce:
+Produces:
 
 ```
 [
   {
-    "openingHours": "Mo 1-3",
-    "human": "Mon 1 - 3 a.m."
+    "openingHours": "Mo-Tu 8:10-16:25,17:00-18:07",
+    "human": "Monday - Tuesday 8:10 a.m. - 4:25 p.m., 5 - 6:07 p.m."
   },
   {
-    "openingHours": "Tu",
-    "human": "Tue all day"
+    "openingHours": "We,Fr 12:05-14:05",
+    "human": "Wednesday, Friday 12:05 - 2:05 p.m."
   },
   {
-    "openingHours": "We 9:00-13:00",
-    "human": "Wed 9 a.m. - 1 p.m."
+    "openingHours": "Th-Fr,Sa 6:03-7:30",
+    "human": "Thursday - Friday, Saturday 6:03 - 7:30 a.m."
   },
   {
-    "openingHours": "Th",
-    "human": "Thu all day"
-  },
-  {
-    "openingHours": "Fr",
-    "human": "Fri all day"
-  },
-  {
-    "openingHours": "Sa",
-    "human": "Sat all day"
-  },
-  {
-    "openingHours": "Su 14:00-19:34",
-    "human": "Sun 2 - 7:34 p.m."
+    "openingHours": "Su",
+    "human": "Sunday all day"
   }
 ]
 ```
@@ -124,6 +112,76 @@ Parses the openingHours string and produces a result as an object, rather than a
 import {openingHoursToDetails} from '@cullylarson/openinghours'
 
 const results = openingHoursToDetails('Mo 1-3; Tu; We 9:00-13:00; Th; Fr; Sa; Su 14:00-19:34')
+```
+
+Produces:
+
+```
+[
+  {
+    "openingHours": "Mo-Tu 8:10-16:25,17:00-18:07",
+    "days": [
+      [
+        "Mo",
+        "Tu"
+      ]
+    ],
+    "hours": [
+      [
+        "8:10",
+        "16:25"
+      ],
+      [
+        "17:00",
+        "18:07"
+      ]
+    ]
+  },
+  {
+    "openingHours": "We,Fr 12:05-14:05",
+    "days": [
+      [
+        "We"
+      ],
+      [
+        "Fr"
+      ]
+    ],
+    "hours": [
+      [
+        "12:05",
+        "14:05"
+      ]
+    ]
+  },
+  {
+    "openingHours": "Th-Fr,Sa 6:03-7:30",
+    "days": [
+      [
+        "Th",
+        "Fr"
+      ],
+      [
+        "Sa"
+      ]
+    ],
+    "hours": [
+      [
+        "6:03",
+        "7:30"
+      ]
+    ]
+  },
+  {
+    "openingHours": "Su",
+    "days": [
+      [
+        "Su"
+      ]
+    ],
+    "hours": []
+  }
+]
 ```
 
 ## Options:
