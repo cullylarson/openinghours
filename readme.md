@@ -85,6 +85,10 @@ Would produce the result:
 
 Notice that each "set" of openingHours (i.e. separatored by `;`) get its own item in the result array. Each item in the array has 'openingHours' (the original openingHours string that produced the result) and `human` (the human-readable version of the openingHours string).
 
+### openingHoursToDetails
+
+Parses the openingHours string and produces a result as an object, rather than a human-readable string. Useful if you want to pull specific data out. It is used by the `openingHoursToHuman` function. It is not currently documented or directly tested (just indirectly by testing `openingHoursToHuman`).
+
 ## Options:
 
 Here are the default options. See [test/openingHoursToStr.test.js](openingHoursToStr.test.js) for examples.
