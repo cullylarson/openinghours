@@ -197,6 +197,8 @@ const formatOneSet = options => set => {
 export const openingHoursToDetails = (openingHours, options) => {
     options = {...defaultOptions, ...options}
 
+    if(!openingHours || !openingHours.trim()) return []
+
     return openingHours
         .trim()
         .split(options.multiItemSeparator)

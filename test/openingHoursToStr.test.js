@@ -1,5 +1,12 @@
 import {openingHoursToHuman} from '../esm/'
 
+test('Handles an empty string well.', () => {
+    const result = openingHoursToHuman('')
+
+    expect(result.length).toBe(0)
+    expect(result).toEqual([])
+})
+
 test('Formats a single day with no time.', () => {
     const result = openingHoursToHuman('Mo')
 
