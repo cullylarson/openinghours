@@ -49,6 +49,11 @@ test('Handles malformed values well.', () => {
     const result8 = openingHoursToHuman('Mo-W 8')
     expect(result8.length).toBe(1)
     expect(result8[0].human).toEqual('Monday 8 a.m.')
+
+    // gets rid of invalid days
+    const result9 = openingHoursToHuman('M')
+    expect(result9.length).toBe(1)
+    expect(result9[0].human).toEqual('')
 })
 
 test('Formats a single day with no time.', () => {

@@ -199,9 +199,19 @@ const formatHours = (options, hours) => {
 }
 
 const formatOneSet = options => set => {
+    const daysFormatted = formatDays(options, set.days)
+    const hoursFormatted = formatHours(options, set.hours)
+
+    // if the days is empty, don't include the hours either
+    const human = daysFormatted
+        ? [daysFormatted, hoursFormatted]
+            .filter(Boolean)
+            .join(options.dayHourSeparator)
+        : ''
+
     return {
         openingHours: set.openingHours,
-        human: [formatDays(options, set.days), formatHours(options, set.hours)].join(options.dayHourSeparator),
+        human,
     }
 }
 
