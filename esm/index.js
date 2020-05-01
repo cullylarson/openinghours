@@ -83,6 +83,7 @@ const oneOpeningHoursToDetails = options => openingHours => {
 const formatDay = options => day => {
     return day
         .map(x => options.dayNames[x])
+        .filter(Boolean)
         .join(options.dayRangeSeparator)
 }
 
@@ -153,6 +154,10 @@ const getAmPm = (options, isFirstInRangeOfSame, hour) => {
 }
 
 const formatMinutes = (options, minutes) => {
+    // make sure minutes is a valid value if they were left out
+    minutes = minutes || '00'
+    if(minutes.length === 1) minutes = minutes + '0'
+
     const minutesInt = parseInt(minutes)
 
     return minutesInt !== 0 || options.includeZeroMinutes

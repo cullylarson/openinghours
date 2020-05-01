@@ -30,6 +30,25 @@ test('Handles malformed values well.', () => {
     const result4 = openingHoursToHuman('Mo 8-')
     expect(result4.length).toBe(1)
     expect(result4[0].human).toEqual('Monday 8 a.m.')
+
+    const result5 = openingHoursToHuman('Mo-Fr 8:00-17:30; Sa 9:00-')
+    expect(result5.length).toBe(2)
+    expect(result5[0].human).toEqual('Monday - Friday 8 a.m. - 5:30 p.m.')
+    expect(result5[1].human).toEqual('Saturday 9 a.m.')
+
+    const result6 = openingHoursToHuman('Mo 8:')
+    expect(result6.length).toBe(1)
+    expect(result6[0].human).toEqual('Monday 8 a.m.')
+
+    // zero-pads minutes
+    const result7 = openingHoursToHuman('Mo 8:3')
+    expect(result7.length).toBe(1)
+    expect(result7[0].human).toEqual('Monday 8:30 a.m.')
+
+    // gets rid of invalid days
+    const result8 = openingHoursToHuman('Mo-W 8')
+    expect(result8.length).toBe(1)
+    expect(result8[0].human).toEqual('Monday 8 a.m.')
 })
 
 test('Formats a single day with no time.', () => {
