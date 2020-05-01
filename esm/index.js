@@ -25,6 +25,8 @@ const defaultOptions = {
 const trim = x => x.trim()
 
 const normalizeDayCase = x => {
+    if(!x || !x.trim || !x.trim()) return ''
+
     const letters = x
         .toLowerCase()
         .split('')
@@ -40,6 +42,7 @@ const dayToDetails = dayStr => dayStr
     .trim()
     .split('-')
     .map(normalizeDayCase)
+    .filter(Boolean)
 
 const daysToDetails = daysStr => daysStr
     .trim()
@@ -49,6 +52,7 @@ const daysToDetails = daysStr => daysStr
 const hourToDetails = hourStr => hourStr
     .trim()
     .split('-')
+    .filter(Boolean)
 
 const hoursToDetails = hoursStr => {
     if(!hoursStr) return []
@@ -62,6 +66,8 @@ const hoursToDetails = hoursStr => {
 }
 
 const oneOpeningHoursToDetails = options => openingHours => {
+    if(!isString(openingHours) || !openingHours.trim()) return null
+
     const [daysStr, hoursStr] = openingHours
         .trim()
         .split(dayTimeSep)
@@ -205,6 +211,7 @@ export const openingHoursToDetails = (openingHours, options) => {
         .trim()
         .split(options.multiItemSeparator)
         .map(oneOpeningHoursToDetails(options))
+        .filter(Boolean)
 }
 
 export const openingHoursToHuman = (openingHours, options) => {

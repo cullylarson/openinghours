@@ -13,6 +13,25 @@ test('Handles non-string values well.', () => {
     expect(openingHoursToHuman([1, 2])).toEqual([])
 })
 
+// Useful to handle these in case someone uses this library to parse a string as someone is typing
+test('Handles malformed values well.', () => {
+    const result = openingHoursToHuman('Mo;')
+    expect(result.length).toBe(1)
+    expect(result[0].human).toEqual('Monday all day')
+
+    const result2 = openingHoursToHuman('Mo;  ')
+    expect(result2.length).toBe(1)
+    expect(result2[0].human).toEqual('Monday all day')
+
+    const result3 = openingHoursToHuman('Mo-')
+    expect(result3.length).toBe(1)
+    expect(result3[0].human).toEqual('Monday all day')
+
+    const result4 = openingHoursToHuman('Mo 8-')
+    expect(result4.length).toBe(1)
+    expect(result4[0].human).toEqual('Monday 8 a.m.')
+})
+
 test('Formats a single day with no time.', () => {
     const result = openingHoursToHuman('Mo')
 
